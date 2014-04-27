@@ -113,12 +113,25 @@ public class Logistikaufgabe {
 	{
 		
 		
-		DigitalInput di = dis.get(4);
+		
 		
 //		while (true)
 //		{
 			try 
 			{
+				DigitalInput di = dis.get(4);
+				Thread.sleep(100);
+				DigitalInput lichtschranke = dis.get(0);
+				boolean lichtschrankeValue = lichtschranke.value();
+				Thread.sleep(100);
+				int sideDirection = 0;
+				if (lichtschrankeValue) {
+					sideDirection = +1;
+				}
+				else {
+					sideDirection = -1;
+				}
+				
 				boolean value = di.value();
 				Thread.sleep(10);
 				System.out.print(value + "   ");
@@ -133,15 +146,15 @@ public class Logistikaufgabe {
 				}
 				else if (countTurnsInSameDirection == 5)
 				{
-					od.setVelocity(0.0f, 0.0f, 0.6f);
+					od.setVelocity(0.0f, 0.0f, 0.6f * sideDirection);
 					Thread.sleep(1000);
-					od.setVelocity(0.0f, 0.0f, 0.6f);
+					od.setVelocity(0.0f, 0.0f, 0.6f * sideDirection);
 					Thread.sleep(1000);
 					countTurnsInSameDirection = 0;
 				}
 				else
 				{
-					od.setVelocity(0.0f, 0.0f, -0.2f);
+					od.setVelocity(0.0f, 0.0f, -0.2f * sideDirection);
 					Thread.sleep(1000);
 					countTurnsInSameDirection++;
 				}
@@ -165,7 +178,9 @@ public class Logistikaufgabe {
 		//boolean optSens = dis.get(4).value();
 		boolean kollisionDetektor = dis.get(1).value();
 		boolean lichtschranke = dis.get(0).value();
+		Thread.sleep(1000);
 		boolean optisch = dis.get(4).value();
+		
 		float induktiv = ais.get(0).value();
 		
 		System.out.print(kollisionDetektor);
@@ -173,14 +188,14 @@ public class Logistikaufgabe {
 		System.out.println(induktiv);
 		
 		int sideDirection = 0;
-		if (lichtschranke = true) {
+		if (!lichtschranke) {
 			sideDirection = -1;
 		}
 		else {
 			sideDirection = 1;
 		}
 		
-		for (int i = 0; i < 2; i++) 
+		for (int i = 0; i < 4; i++) 
 		{
 			od.setVelocity(0.0f, -0.025f * sideDirection, -0.0125f * sideDirection);
 			Thread.sleep(500);

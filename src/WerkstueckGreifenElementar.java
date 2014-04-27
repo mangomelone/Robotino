@@ -134,35 +134,19 @@ public class WerkstueckGreifenElementar {
 	
 	
 	public void werkstueckGreifen() throws InterruptedException {
-		//boolean optSens = dis.get(4).value();
 		boolean kollisionDetektor = dis.get(1).value();
 		boolean lichtschranke = dis.get(0).value();
 		boolean optisch = dis.get(4).value();
-		
 		float induktiv = ais.get(0).value();
-		
 		System.out.print(kollisionDetektor);
 		System.out.print(lichtschranke);
 		System.out.println(induktiv);
-		
 		while (induktiv > 7.0) {
-			//moveSeitlich(0.025f);
 			od.setVelocity(0.0f, -0.025f, -0.0125f);
 			Thread.sleep(100);
-			
-			
-//			kollisionDetektor = dis.get(1).value();
-//			Thread.sleep(100);
-//			System.out.print(kollisionDetektor);
-//			
-//			lichtschranke = dis.get(0).value();
-//			Thread.sleep(100);
-//			System.out.print(lichtschranke);
-			
 			induktiv = ais.get(0).value();
 			Thread.sleep(100);
 			System.out.println(induktiv);
-			
 			optisch = dis.get(4).value();
 			if (optisch)
 			{
@@ -170,20 +154,12 @@ public class WerkstueckGreifenElementar {
 				optisch = dis.get(4).value();
 				if (optisch) {
 					moveVorwarts(-0.08f);
-//					rotieren(0.4f);
-				}
-				else {
-//					rotieren(-0.4f);
 				}
 			}
-			
-			
 		}
 		rotieren(0.25f);
 		while (!kollisionDetektor) {
-			
 			moveVorwarts(0.03f);
-			
 			kollisionDetektor = dis.get(1).value();
 			Thread.sleep(100);
 		}
@@ -191,10 +167,8 @@ public class WerkstueckGreifenElementar {
 		{
 			moveVorwarts(0.03f);
 		}
-		
 		greifer.close();
 		Thread.sleep(1000);
-		
 		
 		for (int i = 0; i < 5; i++) 
 		{
@@ -207,8 +181,11 @@ public class WerkstueckGreifenElementar {
 			Thread.sleep(500);
 		}
 		//moveVorwarts(-0.04f);
+		
+		
 	}
 	
+
 	public void vorwärtsFahren() throws InterruptedException {
 		while (true) {
 			moveVorwarts(0.04f);

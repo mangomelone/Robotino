@@ -34,9 +34,7 @@ public class LinienverfolgungElementar {
 	public void verfolgeLinie()
 	{
 		int countTurnsInSameDirection = 0;
-		
 		DigitalInput di = dis.get(4);
-		
 		while (true)
 		{
 			try 
@@ -67,12 +65,6 @@ public class LinienverfolgungElementar {
 					Thread.sleep(1000);
 					countTurnsInSameDirection++;
 				}
-			
-			
-//				od.setVelocity(0.10f, 0.0f, 0.0f);
-//				Thread.sleep(1000);
-				
-				
 			} 
 			catch (InterruptedException e) 
 			{

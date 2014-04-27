@@ -13,11 +13,23 @@ public class RobotinoTest {
 	OmniDrive od = new OmniDrive();
 	List<DigitalInput> din = new ArrayList<DigitalInput>();
 	
-	public RobotinoTest()
+	public RobotinoTest() throws InterruptedException
 	{
 		verbinden();
 		od.setComId(communicationId);
-		fahreBisMarkierung();
+		lichtschrankeTest();
+	}
+	
+	public void lichtschrankeTest() throws InterruptedException {
+		DigitalInput di  = new DigitalInput();
+		di.setComId(communicationId);
+		di.setInputNumber(0);
+		while (true) {
+			boolean lichtschranke = di.value();
+			Thread.sleep(1000);
+			System.out.println(lichtschranke);
+		}
+		
 	}
 	
 	public void fahre()
@@ -77,8 +89,9 @@ public class RobotinoTest {
 
 	/**
 	 * @param args
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		RobotinoTest rt = new RobotinoTest();
 	
